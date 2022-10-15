@@ -2,8 +2,8 @@
 
 Individual Database Application : EC570 : Department of Computer Engineering : Faculty of Engineering: University of Jaffna
 
-Problem Statement for E-week DB Project
-Karunanayaka D.W.A.M.
+Problem Statement for E-week DB Project     
+Karunanayaka D.W.A.M.   
 09 SEPTEMBER 2022
 1. High Level Problem Summary
 E-week has many events. So, we need to keep a record of all those events. It is necessary to select winning teams, the best players, the best performers, and so on. This database management system will be developed to keep complete activity records easily.
