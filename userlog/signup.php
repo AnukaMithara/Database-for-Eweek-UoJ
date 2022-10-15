@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     {
 
         //save data to database
-        $user_id = random_num(10);
+        $user_id = getnextid($con);       
         $query = "insert into userlog (userid,username,useremail,userpassword) values ('$user_id','$user_name','$email','$password')";
         mysqli_query($con, $query);  
 
@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
         <div id = "box">
             <form method = "post">
-                <div style = "font-size: 20px; margin: 10px; color: white;">Signup</div>
+                <div style = "font-size: 20px; margin: 10px; color: white;">User Signup</div>
                 
                 
                 <input id="text" type = "first_name" name = "first_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->

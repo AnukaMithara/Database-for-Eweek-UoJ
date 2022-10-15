@@ -1,5 +1,8 @@
 <?php
 
+
+//If the user is logged in, return the user's data. If not, redirect to the login page.
+
 function check_login($con)
 {
     if(isset($_SESSION['user_id']))
@@ -20,21 +23,24 @@ function check_login($con)
     die;
 }
 
-function random_num($length)
+
+
+//It gets the max id from the userlog table, adds 1 to it, and returns the result.
+function getnextid($con)
 {
-    $text = "";
-    if($length < 5)
+
+    $query = "select max(userid) from userlog";             //Sql query to get the max id from the userlog table.
+    $result = mysqli_query($con, $query);                   
+    $row = mysqli_fetch_row($result);                       //Get the result of the query to a array.
+    $maxid = $row[0];                                       //Get the element from the array.   
+    if($result)
     {
-        $length = 5;
+        $maxid = $maxid + 1;
+        
+        return $maxid;
     }
-    
-    $len = rand(4,$length);
-    
-    for($i=0; $i < $len; $i++)
-    {
-        $text .= rand(0,9);
+    else{
+        return 1;
     }
-    
-    return $text;
+   
 }
- 

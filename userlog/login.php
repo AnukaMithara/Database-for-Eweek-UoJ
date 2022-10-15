@@ -77,13 +77,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
         <div id = "box">
             <form method = "post">
-                <div style = "font-size: 20px; margin: 10px; color: white;">Login</div>
+                <div style = "font-size: 20px; margin: 10px; color: white;">User Login</div>
                 
                 <input id="text" type = "user_email" name = "user_email"> <br><br>
                 <input id="text" type = "password" name = "password"> <br><br>
 
-                <input id="button" type = "submit" value = "Login"><br><br>
+                <input id="button" type = "submit" value = "userLogin"><br><br>
                 <a href = "signup.php">Click to Signup</a>
+
+                <a href = "adminlog.php">Login as Admin</a>
             </form>
         </div>
 </body>
