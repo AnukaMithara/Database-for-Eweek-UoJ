@@ -5,8 +5,7 @@ include("functions.php");
 
 if($_SERVER['REQUEST_METHOD'] == "POST")
 {
-    //something was posted
-    
+      
     $user_name = $_POST["first_name"] . ' ' . $_POST["last_name"];
     
     $email = $_POST['email'];
@@ -18,12 +17,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     {
 
         //save data to database
-        $user_id = getnextid($con);       
-        $query = "insert into userlog (userid,username,useremail,userpassword) values ('$user_id','$user_name','$email','$password')";
-        mysqli_query($con, $query);  
-
-        header("Location: login.php");
-        die;
+        $user_id = getnextid($con, "userid", "userlog");           
+       
+        if (isAvailable($con,$email) == true) {
+            echo "Email already exists!";
+            
+          }else{
+            $query = "insert into userlog (userid,username,useremail,userpassword) values ('$user_id','$user_name','$email','$password')";
+            mysqli_query($con, $query);
+            header("Location: login.php");
+            die;
+          }  
+            
     
     }else
     {
@@ -38,44 +43,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     <title>Signup</title>
 </head>
 <body>
-    <style type =  "text/css">
-        #text {
-            height: 25px;
-            border-radius: 5px;
-            padding: 4px;
-            border: solid thin #aaa;
-            width: 100%;
-        }
-
-        #button {
-            padding: 10px;
-            width: 100px;
-            color: white;
-            background-color: lightblue;
-            border: none;
-        }
-
-        #box {
-            background-color: grey;
-            margin: auto;
-            width: 300px;
-            padding: 20px;
-        }
-        </style>
+<link rel="stylesheet" type="text/css" href="style.css">          <!--Link to the css file-->
 
         <div id = "box">
             <form method = "post">
-                <div style = "font-size: 20px; margin: 10px; color: white;">User Signup</div>
+                <div style = "color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 40px; 
+                font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">User Signup</div><br>
                 
                 
-                <input id="text" type = "first_name" name = "first_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->
-                <input id="text" type = "last_name" name = "last_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->
-                <input id="text" type = "email" name = "email"> <br><br>                <!╌ creating a text box for the user to enter their email. Getting inputs for email -->
-                <input id="text" type = "password" name = "password"> <br><br>          <!╌ creating a text box for the user to enter their password. Getting inputs for password -->   
+                <input placeholder="First Name" type="text" class="input" required="" name = "first_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->
+                <input placeholder="Last Name" type="text" class="input" required="" name = "last_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->
+                <input placeholder="Email" type="text" class="input" required="" name = "email"> <br><br>                <!╌ creating a text box for the user to enter their email. Getting inputs for email -->
+                <input placeholder="Password" type="password" class="input" required="" name = "password"> <br><br>          <!╌ creating a text box for the user to enter their password. Getting inputs for password -->   
 
                 <input id="button" type = "submit" value = "Signup"><br><br>
                 <a href = "login.php">Click to Login</a>
             </form>
+            
         </div>
+        
 </body>
 </html>

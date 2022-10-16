@@ -50,41 +50,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     <title>Login</title>
 </head>
 <body>
-    <style type =  "text/css">
-        #text {
-            height: 25px;
-            border-radius: 5px;
-            padding: 4px;
-            border: solid thin #aaa;
-            width: 100%;
-        }
-
-        #button {
-            padding: 10px;
-            width: 100px;
-            color: white;
-            background-color: lightblue;
-            border: none;
-        }
-
-        #box {
-            background-color: grey;
-            margin: auto;
-            width: 300px;
-            padding: 20px;
-        }
-        </style>
+<link rel="stylesheet" type="text/css" href="style.css">      <!--Link to the css file-->
 
         <div id = "box">
             <form method = "post">
-                <div style = "font-size: 20px; margin: 10px; color: white;">User Login</div>
+            <div style = "color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 40px; 
+                font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">User Login</div><br><br><br>
                 
-                <input id="text" type = "user_email" name = "user_email"> <br><br>
-                <input id="text" type = "password" name = "password"> <br><br>
+                <input placeholder="Email" type="text" class="input" required="" name = "user_email"> <br><br>
+                <input placeholder="Password" type="password" class="input" required="" name = "password"> <br><br>
 
-                <input id="button" type = "submit" value = "userLogin"><br><br>
-                <a href = "signup.php">Click to Signup</a>
-
+                <input id="button" type = "submit" value = "Login"><br><br>
+                <a href = "signup.php">Click to Signup</a><br><br>
                 <a href = "adminlog.php">Login as Admin</a>
             </form>
         </div>
