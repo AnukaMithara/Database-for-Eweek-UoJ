@@ -25,7 +25,7 @@ $user_data = check_login($con);
                         <li><a href="login.php">Login</a></li>  
                         <li><a href="adminlog.php">Admin</a></li>  
                         <li><a href="logout.php">Logout</a></li>  
-                        <li><a href="#">History</a></li>   
+                        <li><a href="addplayer.php">Add Player</a></li>   
                         
 
                     </ul>

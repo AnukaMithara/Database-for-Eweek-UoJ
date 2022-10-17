@@ -58,3 +58,16 @@ function isAvailable($con,$email)                           //Check if the email
        }
        return false;
 }
+
+function isAvailablePlayer($con,$email)                           //Check if the email is already in use.
+  {
+        $query = "select * from player where registrationid = '$email'" ;
+
+        $result = mysqli_query($con, $query); 
+
+        if($result && mysqli_num_rows($result) > 0)
+        {
+            return true;
+       }
+       return false;
+}
