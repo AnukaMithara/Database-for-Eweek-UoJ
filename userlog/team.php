@@ -3,7 +3,9 @@
 session_start();
 include("connection.php");
 include("functions.php");
+
 $user_data = check_admin_login($con);
+
 if($_SERVER['REQUEST_METHOD'] == "POST")
 {
       
@@ -52,9 +54,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
         <div id = "box">
             <form method = "post">
-                <div style = "color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 40px; 
-                font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Add Player Details</div><br>
-                
+                <div style = "color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 30px; 
+                font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Add Player to Team</div><br>                
                 
                 <input placeholder="First Name" type="text" class="input" required="" name = "first_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->
                 <input placeholder="Last Name" type="text" class="input" required="" name = "last_name"> <br><br>        <!╌ creating a text box for the user to enter their name. Getting inputs for user_name -->

@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                 {
 
                     $_SESSION['admin_id'] = $admin_data['adminid'];
-                    header("Location: index.php");
+                    header("Location: admincontrol.php");
                     die;
                 }
             }

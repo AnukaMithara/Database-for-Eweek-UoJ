@@ -1,11 +1,11 @@
 <?php
-session_start();
+/*session_start();
 
 include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
-/* Hello, <?php echo $user_data['username']; ?>, <?php echo $user_data['useremail']; ?>    This is how you print something  --> */
+ Hello, <?php echo $user_data['username']; ?>, <?php echo $user_data['useremail']; ?>    This is how you print something  --> */
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +23,9 @@ $user_data = check_login($con);
                     <ul>
                         <li><a href="signup.php">Signup</a></li>  
                         <li><a href="login.php">Login</a></li>  
-                        <li><a href="adminlog.php">Admin</a></li>  
+                        <li><a href="admincontrol.php">Admin Panel</a></li>                          
                         <li><a href="logout.php">Logout</a></li>  
-                        <li><a href="addplayer.php">Add Player</a></li>   
+                         
                         
 
                     </ul>
@@ -84,7 +84,7 @@ $user_data = check_login($con);
                         <td>Latest Solo Match Details </td>
                     </tr>
                     <tr>
-                        <td>Latest Creative activity Details </td>				
+                        <td>Latest Aesthetic activity Details </td>				
                     </tr>
                     <tr>
                         <td>Latest Athletic Details </td>				
