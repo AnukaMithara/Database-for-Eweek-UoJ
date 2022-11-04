@@ -26,7 +26,10 @@ $user_data = check_login($con);
                 </div>
   <div class="buttons">  
         <button onclick="document.location='viewplayerdetails.php'">View Player Details</button>
-        
+        <button onclick="document.location='registeredTeams.php'">Register count for Group Sports</button>
+        <button onclick="document.location='registeredTeams.php'">Register count for Aesthetic events</button>
+        <button onclick="document.location='registeredTeams.php'">Register count for Solo events</button>
+        <button onclick="document.location='registeredTeams.php'">Register count for Athletic events</button>
 
   </div>
   </body>
