@@ -3,7 +3,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 $user_data = check_admin_login($con);
-
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +33,7 @@ $user_data = check_admin_login($con);
 
                             <input id="button" type="submit" value="Add Admin"><br><br>
                             <a href="admincontrol.php">Admin control</a>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="addadmin.php">Add Again</a>
+                            
 
                             <?php
 

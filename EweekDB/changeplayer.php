@@ -45,8 +45,7 @@ $user_data = check_admin_login($con);
                 <input placeholder="If player had any health issues" type="text" class="input" name="health_iss"> <br><br>
                 <input id="button" type="submit" value="Change Player"><br><br>
                 <a href="admincontrol.php">Admin Control Page</a>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <a href="changeplayer.php">Change Again</a>
+                
 
                 <?php
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {

@@ -3,9 +3,7 @@ session_start();
 
 include("connection.php");
 include("functions.php");
-
 $user_data = check_admin_login($con);
-
 ?>
 
 <!DOCTYPE html>

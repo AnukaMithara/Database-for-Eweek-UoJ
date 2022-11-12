@@ -3,7 +3,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 $user_data = check_login($con);
-
 ?>
 
 
@@ -11,18 +10,27 @@ $user_data = check_login($con);
 <html>
 
 <head>
-    <title>View Register count for event</title>
+    <title>View Registrants for Group Sports</title>
 </head>
 
 <body>
-    <link rel="stylesheet" type="text/css" href="formstyle.css">
+    <link rel="stylesheet" type="text/css" href="miniformstyle.css">
     <!--Link to the css file-->
 
     <div id="box">
         <form method="post">
             <div style="color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 40px; 
-                font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Count of Group Sports</div><br>
-            <input placeholder="Batch" type="text" class="input" required="" name="batch"> <br><br><br>
+                font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Details of Group Sports</div>
+                <br><br><br>
+
+            <label for="batch">Batch</label>
+            <select name="batch" id="batch">
+                <option value="0">Select event:</option>
+                <option value="E18">E18</option>
+                <option value="E19">E19</option>
+                <option value="E20">E20</option>
+                <option value="E21">E21</option>
+            </select><br><br><br>
 
             <label for="game">Sport</label>
             <select name="sportsid" id="sportsid">
@@ -37,30 +45,27 @@ $user_data = check_login($con);
 
             <input id="button" type="submit" value="View Details"><br><br>
 
+
             <?php
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 $batch = $_POST["batch"];
                 $sportsid = $_POST["sportsid"];
 
-
-                $query = "select count(*) as total from team where batch = '$batch' AND gameid = '$sportsid'";
-
-                $result = mysqli_query($con, $query);
-
-                if ($result && mysqli_num_rows($result) > 0) {
-                    $user_data = mysqli_fetch_assoc($result);
-            ?>
-
-                    <input placeholder="Players" type="text" class="input" value="Players Registered for <?= getGame($con, $sportsid); ?> from <?= $batch; ?> :  <?= $user_data['total']; ?> " <br><br><br><br>
-
-            <?php
+                if ($batch != 0 && $sportsid != 0) {
+                    
+                    $_SESSION['batch'] = $batch;
+                    $_SESSION['sportsid'] = $sportsid;
+                    header("Location: groupactivitiestable.php");
+              
                 } else {
-                    echo "Player not available";
+                ?><p style="color:red">Please enter some valid information!</p>
+                <?php
                 }
             }
             ?>
             <a href="usercontrol.php">User Control Page</a>
+            <a href="groupactivitiestable.php">Table</a>
         </form>
     </div>
 </body>

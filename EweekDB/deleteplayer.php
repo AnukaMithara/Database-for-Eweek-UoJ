@@ -3,7 +3,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 $user_data = check_admin_login($con);
-
 ?>
 
 
@@ -15,7 +14,7 @@ $user_data = check_admin_login($con);
 </head>
 
 <body>
-    <link rel="stylesheet" type="text/css" href="short.css">
+    <link rel="stylesheet" type="text/css" href="miniformstyle.css">
     <!--Link to the css file-->
 
     <div id="box">
@@ -24,21 +23,30 @@ $user_data = check_admin_login($con);
                 font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Delete Player</div><br> <br>
             <input placeholder="Player Registration number : 20**/E/***" type="text" class="input" required="" name="reg_id"> <br><br>
             <input id="button" type="submit" value="Delete Player"><br><br>
+            <br>
+            <a href="admincontrol.php">Admin Control Page</a> <br><br>
 
             <?php
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $reg_id = $_POST["reg_id"];
 
-                if (isAvailablePlayer($con, $reg_id)) {
+                if (isAvailablePlayerinTeamTable($con, $reg_id)) {                  
+                ?><p style="color:red">Player already in team!</p>
+                <?php
+
+                } elseif (isAvailablePlayer($con, $reg_id)) {
                     $query = "DELETE FROM player where registrationid = '$reg_id' limit 1";
                     $result = mysqli_query($con, $query);
-                    echo "Successfully deleted";
+                ?><p style="color:green">Successfully deleted</p>
+                <?php
+
                 } else {
-                    echo "Player not available";
+                ?><p style="color:red">Player not available</p>
+                <?php
+
                 }
             }
-            ?><br><br>
-            <a href="admincontrol.php">Admin Control Page</a>
+                ?>
         </form>
 
     </div>

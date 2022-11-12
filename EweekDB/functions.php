@@ -118,21 +118,32 @@ function isAvailableTeam($con, $teamid)                           //Check if the
     return false;
 }
 
-function addPoints($con, $id, $points)
+function isAvailablePlayerinTeamTable($con, $playerid)                          
 {
+    $query = "select * from team where playerid = '$playerid'";
 
-    $query = "select points from player where registrationid = '$id' limit 1";
     $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_row($result);
-    $past_points = $row[0];
 
-    $new_points = $past_points + $points;
-
-    $query2 = "UPDATE player SET points='$new_points' WHERE registrationid='$id'";
-    $result = mysqli_query($con, $query2);
+    if ($result && mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
 }
 
-function addPoints2($con, $id, $points)
+function isAvailablePlayerinTeam($con, $playerid, $teamid)                          
+{
+    $query = "select * from team where playerid = '$playerid' and teamid = '$teamid'";
+
+    $result = mysqli_query($con, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}
+
+
+function addPoints($con, $id, $points)
 {
 
     $query = "select points from player where registrationid = '$id' limit 1";
@@ -156,4 +167,18 @@ function getGame($con, $id)
     $game = $row[0];
 
     return $game;
+}
+
+
+function addTeamPoints($con, $teamid, $gameid,$points)
+{
+    
+    $query = "select * from team where teamid = '$teamid' and gameid='$gameid'";
+    $result = mysqli_query($con, $query);
+       
+     while($row = $result->fetch_assoc())
+     {
+        $playerid = $row['playerid'];
+        addPoints($con, $playerid, $points);
+     }
 }

@@ -3,34 +3,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 $user_data = check_admin_login($con);
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-    $game_id = $_POST["game_id"];
-    $reg_id = $_POST["reg_id"];
-    $rank = $_POST["rank"];
-    $points = $_POST["points"];
-    $comments = $_POST["comments"];
-
-
-    $event_id = getnextid($con, "eventid", "athlatics");
-
-    //save data to database
-    if ($game_id != 0) {
-
-        if (isAvailablePlayer($con, $reg_id) == false) {
-            echo "Player not exists!, Please add player first!";
-        } else {
-            $query = "insert into athlatics (eventid,gameid,playerid,rank,points,comments) values ('$event_id','$game_id','$reg_id','$rank','$points','$comments')";
-            mysqli_query($con, $query);
-            addPoints($con, $reg_id, $points);
-            header("Location: aesthetic.php");
-            die;
-        }
-    } else {
-        echo "Please enter some valid information!";
-    }
-}
-
 ?>
 
 
@@ -67,7 +39,42 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input placeholder="Comments" type="text" class="input" name="comments"> <br><br>
 
             <input id="button" type="submit" value="Add Activity"><br><br>
-            <a href="admincontrol.php">Admin Control Page</a>
+            <a href="admincontrol.php">Admin Control Page</a><br><br>
+
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $game_id = $_POST["game_id"];
+                $reg_id = $_POST["reg_id"];
+                $rank = $_POST["rank"];
+                $points = $_POST["points"];
+                $comments = $_POST["comments"];
+
+
+                $event_id = getnextid($con, "eventid", "athlatics");
+
+                //save data to database
+                if ($game_id != 0) {
+
+                    if (isAvailablePlayer($con, $reg_id) == false) {
+            ?><p style="color:red">Player not exists!, Please add player first!</p>
+                    <?php
+                    } else {
+                        $query = "insert into athlatics (eventid,gameid,playerid,rank,points,comments) values ('$event_id','$game_id','$reg_id','$rank','$points','$comments')";
+                        mysqli_query($con, $query);
+                        addPoints($con, $reg_id, $points);
+                    ?><p style="color:green">Successfully Added</p>
+                    <?php
+                        die;
+                    }
+                } else {
+                    ?><p style="color:red">Please enter some valid information!</p>
+            <?php
+                }
+            }
+
+            ?>
+
         </form>
 
     </div>

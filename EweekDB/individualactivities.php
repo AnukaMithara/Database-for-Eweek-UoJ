@@ -3,44 +3,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 $user_data = check_admin_login($con);
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-    $game_id = $_POST["game_id"];
-    $reg_id_1 = $_POST["reg_id_1"];
-    $reg_id_2 = $_POST["reg_id_2"];
-    $points_p1 = $_POST["points_p1"];
-    $points_p2 = $_POST["points_p2"];
-    $comments = $_POST["comments"];
-    $win = $_POST["win"];
-
-    if ($_POST["win"] == "player1") {
-        $win = $reg_id_1;
-    } else if ($_POST["win"] == "player2") {
-        $win = $reg_id_2;
-    }
-
-    $event_id = getnextid($con, "eventid", "individualspactivities");
-
-    //save data to database
-    if ($game_id != 0 && $win != 0) {
-
-        if (!isAvailablePlayer($con, $reg_id_1) || !isAvailablePlayer($con, $reg_id_2)) {
-            echo "Player(s) not exists!, Please add player(s) first!";
-        } else {
-            $query = "insert into individualspactivities (eventid,gameid,player1id,player2id,win,player1_points,player2_points,comments) values ('$event_id','$game_id','$reg_id_1','$reg_id_2','$win','$points_p1','$points_p2','$comments')";
-            mysqli_query($con, $query);
-
-            addPoints($con, $reg_id_1, $points_p1);
-            addPoints($con, $reg_id_2, $points_p2);
-
-            header("Location: individualactivities.php");
-            die;
-        }
-    } else {
-        echo "Please enter some valid information!";
-    }
-}
-
 ?>
 
 
@@ -84,7 +46,53 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input placeholder="Comments" type="text" class="input" name="comments"> <br><br>
 
             <input id="button" type="submit" value="Add Activity"><br><br>
-            <a href="admincontrol.php">Admin Control Page</a>
+            <a href="admincontrol.php">Admin Control Page</a><br>
+
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $game_id = $_POST["game_id"];
+                $reg_id_1 = $_POST["reg_id_1"];
+                $reg_id_2 = $_POST["reg_id_2"];
+                $points_p1 = $_POST["points_p1"];
+                $points_p2 = $_POST["points_p2"];
+                $comments = $_POST["comments"];
+                $win = $_POST["win"];
+
+                if ($_POST["win"] == "player1") {
+                    $win = $reg_id_1;
+                } else if ($_POST["win"] == "player2") {
+                    $win = $reg_id_2;
+                }
+
+                $event_id = getnextid($con, "eventid", "individualspactivities");
+
+                //save data to database
+                if ($game_id != 0 && $win != 0) {
+
+                    if (!isAvailablePlayer($con, $reg_id_1) || !isAvailablePlayer($con, $reg_id_2)) {
+            ?><p style="color:red">Player(s) not exists!, Please add player(s) first!</p>
+                    <?php
+
+                    } else {
+                        $query = "insert into individualspactivities (eventid,gameid,player1id,player2id,win,player1_points,player2_points,comments) values ('$event_id','$game_id','$reg_id_1','$reg_id_2','$win','$points_p1','$points_p2','$comments')";
+                        mysqli_query($con, $query);
+
+                        addPoints($con, $reg_id_1, $points_p1);
+                        addPoints($con, $reg_id_2, $points_p2);
+
+                    ?><p style="color:green">Successfully Added</p>
+                    <?php
+                        die;
+                    }
+                } else {
+                    ?><p style="color:red">Please enter some valid information!</p>
+            <?php
+                }
+            }
+            ?>
+
+
         </form>
 
     </div>

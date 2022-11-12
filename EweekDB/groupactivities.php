@@ -3,40 +3,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 $user_data = check_admin_login($con);
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-    $game_id = $_POST["game_id"];
-    $reg_id_1 = $_POST["reg_id_1"];
-    $reg_id_2 = $_POST["reg_id_2"];
-    $points_p1 = $_POST["points_p1"];
-    $points_p2 = $_POST["points_p2"];
-    $comments = $_POST["comments"];
-    $win = $_POST["win"];
-
-    if ($_POST["win"] == "player1") {
-        $win = $reg_id_1;
-    } else if ($_POST["win"] == "player2") {
-        $win = $reg_id_2;
-    }
-
-    $event_id = getnextid($con, "eventid", "groupspactivities");
-
-    //save data to database
-    if ($game_id != 0 && $win != 0) {
-
-        if (!isAvailableTeam($con, $reg_id_1) || !isAvailableTeam($con, $reg_id_2)) {
-            echo "Team(s) not exists!, Please add Team(s) first!";
-        } else {
-            $query = "insert into groupspactivities (eventid,gameid,team1id,team2id,win,team1_points,team2_points,comments) values ('$event_id','$game_id','$reg_id_1','$reg_id_2','$win','$points_p1','$points_p2','$comments')";
-            mysqli_query($con, $query);
-            header("Location: groupactivities.php");
-            die;
-        }
-    } else {
-        echo "Please enter some valid information!";
-    }
-}
-
 ?>
 
 
@@ -83,6 +49,50 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <input id="button" type="submit" value="Add Activity"><br><br>
             <a href="admincontrol.php">Admin Control Page</a>
+           <br><br>
+
+            <?php
+
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $game_id = $_POST["game_id"];
+                $reg_id_1 = $_POST["reg_id_1"];
+                $reg_id_2 = $_POST["reg_id_2"];
+                $points_p1 = $_POST["points_p1"];
+                $points_p2 = $_POST["points_p2"];
+                $comments = $_POST["comments"];
+                $win = $_POST["win"];
+
+                if ($_POST["win"] == "player1") {
+                    $win = $reg_id_1;
+                } else if ($_POST["win"] == "player2") {
+                    $win = $reg_id_2;
+                }
+
+                $event_id = getnextid($con, "eventid", "groupspactivities");
+
+                //save data to database
+                if ($game_id != 0 && $win != 0) {
+
+                    if (!isAvailableTeam($con, $reg_id_1) || !isAvailableTeam($con, $reg_id_2)) {
+            ?><p style="color:red">Team(s) not exists!, Please add Team(s) first!</p>
+                    <?php
+
+                    } else {
+                        $query = "insert into groupspactivities (eventid,gameid,team1id,team2id,win,team1_points,team2_points,comments) values ('$event_id','$game_id','$reg_id_1','$reg_id_2','$win','$points_p1','$points_p2','$comments')";
+                        mysqli_query($con, $query);
+                        addTeamPoints($con,  $reg_id_1, $game_id, $points_p1);
+                        addTeamPoints($con, $reg_id_2, $game_id, $points_p2);
+                    ?><p style="color:green">Successfully Added</p>
+                    <?php
+                        die;
+                    }
+                } else {
+                    ?><p style="color:red">lease enter some valid information!</p>
+            <?php
+                }
+            }
+            ?>
         </form>
 
     </div>

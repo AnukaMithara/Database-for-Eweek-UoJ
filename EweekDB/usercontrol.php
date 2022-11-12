@@ -3,9 +3,7 @@ session_start();
 
 include("connection.php");
 include("functions.php");
-
 $user_data = check_login($con);
-
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +26,10 @@ $user_data = check_login($con);
   </div>
   <div class="buttons">
     <button onclick="document.location='viewplayerdetails.php'">View Player Details</button>
-    <button onclick="document.location='registeredTeams.php'">Register count for Group Sports</button>
-    <button onclick="document.location='registeredTeams.php'">Register count for Aesthetic events</button>
-    <button onclick="document.location='registeredTeams.php'">Register count for Solo events</button>
-    <button onclick="document.location='registeredTeams.php'">Register count for Athletic events</button>
+    <button onclick="document.location='viewgroupact.php'">Registrants for Group Sports</button>
+    <button onclick="document.location='viewaesthetic.php'">Registrants for Aesthetic events</button>
+    <button onclick="document.location='viewindividual.php'">Registrants for Individual Sports</button>
+    <button onclick="document.location='viewathlatics.php'">Registrants for Athletic events</button>
 
   </div>
 </body>

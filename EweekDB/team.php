@@ -2,26 +2,7 @@
 session_start();
 include("connection.php");
 include("functions.php");
-
 $user_data = check_admin_login($con);
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $team_id = $_POST["team_id"];
-    $game_id = $_POST["gameid"];
-    $reg_id = $_POST["reg_id"];
-    $batch = $_POST["batch"];
-    $jersey_num = $_POST["jersey_num"];
-
-    //save data to database
-    if ($game_id != 0 && $batch != 0) {
-        $query = "insert into team (teamid,gameid,playerid,batch,jerseynum) values ('$team_id','$game_id','$reg_id','$batch','$jersey_num')";
-        mysqli_query($con, $query);
-        header("Location: team.php");
-        die;
-    } else {
-        echo "Please enter some valid information!";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +49,42 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <input id="button" type="submit" value="Add to Team"><br><br>
             <a href="admincontrol.php">Admin Control Page</a>
+
+            <?php
+
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $team_id = $_POST["team_id"];
+                $game_id = $_POST["gameid"];
+                $reg_id = $_POST["reg_id"];
+                $batch = $_POST["batch"];
+                $jersey_num = $_POST["jersey_num"];
+
+
+                if (isAvailablePlayer($con, $reg_id) == false) {
+
+            ?><p style="color:red">Please add the player details first!</p>
+                <?php
+
+                } elseif (isAvailablePlayerinTeam($con, $reg_id, $team_id)) {
+
+                ?><p style="color:red">Player already in team!</p>
+                <?php
+
+                } elseif ($game_id != 0 && $batch != 0) {
+                    $query = "insert into team (teamid,gameid,playerid,batch,jerseynum) values ('$team_id','$game_id','$reg_id','$batch','$jersey_num')";
+                    mysqli_query($con, $query);
+                ?><p style="color:green">Successfully Added</p>
+                <?php
+                    die;
+                } else {
+                ?><p style="color:red">Please enter some valid information!</p>
+            <?php
+                }
+            }
+            ?>
+
+
+
         </form>
     </div>
 </body>
