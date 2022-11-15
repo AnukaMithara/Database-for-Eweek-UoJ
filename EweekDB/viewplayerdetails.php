@@ -44,7 +44,9 @@ $user_data = check_login($con);
 
             <?php
                 } else {
-                    echo "Player not available";
+                    
+                    ?><p style="color:red">Player not available!</p>
+                <?php
                 }
             }
             ?>
