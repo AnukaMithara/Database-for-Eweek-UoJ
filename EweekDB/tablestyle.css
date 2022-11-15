@@ -1,15 +1,48 @@
 html,
 
 body {
-   
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background: rgb(26, 120, 112);
-    background: linear-gradient(90deg, rgba(26, 120, 112, 1) 0%, rgba(26, 8, 99, 1) 42%, rgba(104, 0, 163, 1) 100%);
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 100;
+
+	margin: 0;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background: rgb(26, 120, 112);
+	background: linear-gradient(90deg, rgba(26, 120, 112, 1) 0%, rgba(26, 8, 99, 1) 42%, rgba(104, 0, 163, 1) 100%);
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 100;
 }
+
+button {
+
+	--button_radius: 0.75em;
+	--button_color: #e8e8e8;
+	--button_outline_color: #000000;
+	font-size: 17px;
+	font-weight: bold;
+	border: none;
+	border-radius: var(--button_radius);
+	background: var(--button_outline_color);
+}
+
+.button_top {
+	display: block;
+	box-sizing: border-box;
+	border: 2px solid var(--button_outline_color);
+	border-radius: var(--button_radius);
+	padding: 0.75em 1.5em;
+	background: var(--button_color);
+	color: var(--button_outline_color);
+	transform: translateY(-0.2em);
+	transition: transform 0.1s ease;
+}
+
+button:hover .button_top {
+	transform: translateY(-0.33em);
+}
+
+button:active .button_top {
+	transform: translateY(0);
+}
+
 
 .container {
 	position: absolute;
@@ -22,13 +55,13 @@ table {
 	width: 800px;
 	border-collapse: collapse;
 	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 th,
 td {
 	padding: 15px;
-	background-color: rgba(255,255,255,0.2);
+	background-color: rgba(255, 255, 255, 0.2);
 	color: #fff;
 }
 
@@ -37,15 +70,10 @@ th {
 }
 
 thead:th {
-		background-color: #55608f;
-	}
+	background-color: #55608f;
+}
 
 
 tr:hover {
-			background-color: rgba(255,255,255,0.3);
-		}
-	
-
-
-	
-
+	background-color: rgba(255, 255, 255, 0.3);
+}

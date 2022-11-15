@@ -57,6 +57,7 @@ $user_data = check_login($con);
                     $_SESSION['batch'] = $batch;
                     $_SESSION['sportsid'] = $sportsid;
                     header("Location: groupactivitiestable.php");
+                    die;
               
                 } else {
                 ?><p style="color:red">Please enter some valid information!</p>
@@ -65,7 +66,7 @@ $user_data = check_login($con);
             }
             ?>
             <a href="usercontrol.php">User Control Page</a>
-            <a href="groupactivitiestable.php">Table</a>
+           
         </form>
     </div>
 </body>
