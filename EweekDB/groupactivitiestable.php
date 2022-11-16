@@ -21,7 +21,7 @@ $sportsid = $_SESSION['sportsid'];
 	<h1 style="color:white;">Batch : <?= $batch ?></h1>
 	<div class="container">
 		<?php
-		$query = "select teamid  from team WHERE batch like '$batch' AND gameid like '$sportsid'";
+		$query = "SELECT DISTINCT teamid  FROM team WHERE batch like '$batch' AND gameid like '$sportsid'";
 		if ($result = mysqli_query($con, $query)) {
 			$i = 0;
 			while ($row = $result->fetch_assoc()) {
@@ -68,7 +68,7 @@ $sportsid = $_SESSION['sportsid'];
 			if ($i == 0) {
 			?>
 				<h1 style="color:#FF9999;">No teams registered</h1>
-	</div>
+	
 <?php
 			}
 			$result->free();
