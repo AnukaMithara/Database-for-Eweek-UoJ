@@ -30,12 +30,10 @@ $user_data = check_admin_login($con);
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $reg_id = $_POST["reg_id"];
 
-                if (isAvailablePlayerinTeamTable($con, $reg_id)) {                  
-                ?><p style="color:red">Player already in team!</p>
-                <?php
-
-                } elseif (isAvailablePlayer($con, $reg_id)) {
+                if (isAvailablePlayer($con, $reg_id)) {
+                    $query1 = "DELETE FROM team where playerid = '$reg_id' limit 1";
                     $query = "DELETE FROM player where registrationid = '$reg_id' limit 1";
+                    $result1 = mysqli_query($con, $query1);
                     $result = mysqli_query($con, $query);
                 ?><p style="color:green">Successfully deleted</p>
                 <?php
