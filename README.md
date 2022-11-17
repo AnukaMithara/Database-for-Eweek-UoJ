@@ -32,7 +32,8 @@ Karunanayaka D.W.A.M.
     Users       
     
 
-https://user-images.githubusercontent.com/48363103/202537622-bcf35e87-a755-43a6-9809-cd5deef8923e.MP4
+[![Watch the video](https://github.com/AnukaMithara/Database-for-Eweek-UoJ/blob/main/Demo/Demo.png)](https://github.com/AnukaMithara/Database-for-Eweek-UoJ/blob/main/Demo/Demo.MP4)
+
 
 
     
