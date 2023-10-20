@@ -1,4 +1,4 @@
-# Databse-for-Eweek
+# Database-for-Eweek
 
 Individual Database Application : EC570 : Department of Computer Engineering : Faculty of Engineering: University of Jaffna
 
